@@ -1,33 +1,27 @@
 ﻿using Dapper;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Npgsql;
 
 namespace Domain.Dal
 {
     internal class ProdutoDal
     {
-
         private string connectionString;
 
-         public ProdutoDal()
+        public ProdutoDal()
         {
-            connectionString = "Data Source=DESKTOP-PBPI94C;Initial Catalog=Loja;Integrated Security=True;Connect Timeout=30;";    
+            connectionString = "Host=c3gtj1dt5vh48j.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com;Port=5432;Username=u860ivsbd1jsvv;Password=p7ea8ed84051854c89a2640422a245ccdccfa07bc7aa0094ef708ef67fee661a8;Database=dc1n89slqd6av1;";
         }
 
         public void Salvar(Produto produto)
         {
             var sql = @"
-            insert into Produtos (Nome, Preco, UrlImagem, Descricao) values 
+            INSERT INTO Produtos (Nome, Preco, UrlImagem, Descricao) VALUES 
             (@Nome, @Preco, @UrlImagem, @Descricao);
             ";
 
-            using (var connection = new SqlConnection(connectionString)) 
-            { 
+            using (var connection = new NpgsqlConnection(connectionString))
+            {
                 connection.Open();
                 connection.Execute(sql, new
                 {
@@ -35,7 +29,7 @@ namespace Domain.Dal
                     produto.Preco,
                     produto.UrlImagem,
                     produto.Descricao
-                } );
+                });
             }
         }
 
@@ -51,14 +45,14 @@ namespace Domain.Dal
                 FROM
                        Produtos;
             ";
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
                 List<Produto> retorno = connection.Query<Produto>(sql).ToList();
-                return retorno; 
+                return retorno;
             }
-          
         }
+
         public Produto BuscarPorId(int id)
         {
             var sql = @"
@@ -70,14 +64,14 @@ namespace Domain.Dal
                        Descricao
                 FROM
                        Produtos
-					   where id = @id_produto
+                WHERE id = @id_produto
             ";
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                Produto retorno = connection.Query<Produto>(sql, new { id_produto = id}).FirstOrDefault();
+                Produto retorno = connection.Query<Produto>(sql, new { id_produto = id }).FirstOrDefault();
                 return retorno;
-            }   
+            }
         }
 
         internal List<Produto> BuscarPorNome(string nome)
@@ -91,17 +85,15 @@ namespace Domain.Dal
                        Descricao
                 FROM
                        Produtos
-				WHERE 
-					   Nome like '%' + @nome + '%' 
+                WHERE 
+                       Nome ILIKE '%' || @nome || '%'
             ";
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new NpgsqlConnection(connectionString)) 
             {
                 connection.Open();
-                List<Produto> retorno = connection.Query<Produto>(sql, new { nome}).ToList();
+                List<Produto> retorno = connection.Query<Produto>(sql, new { nome }).ToList();
                 return retorno;
             }
-
         }
     }
-
 }
