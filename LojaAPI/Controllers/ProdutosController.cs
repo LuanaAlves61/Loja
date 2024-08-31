@@ -24,10 +24,7 @@ namespace LojaAPI.Controllers
             };
 
             produtoBll.Salvar(produto);
-
-
         }
-
 
         [HttpGet(Name = "GetProdutos")]
         public List<Produto> GetProdutos()

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Oy1eyTp3LjlJwHCQlCvm91jyCtZNABCCXWlDlht7oCXbmZ8MwEWyOeM5RcNMGJA4tS8OBbhX2rQm5NvuBdTPbQ==",
+  "dgSpecHash": "CQ8zPppvvLk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\fheli\\source\\repos\\LojaAPI\\LojaAPI\\LojaAPI.csproj",
+  "projectFilePath": "C:\\Projetos\\Loja\\Loja\\LojaAPI\\LojaAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fheli\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\fheli\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",

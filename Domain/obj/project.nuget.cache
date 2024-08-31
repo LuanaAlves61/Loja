@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qqy9ZJ+yQGiEzGf+alQ36PoA5xFRejjw1H0oVry3HyQm27rqmQWSTYsRLHEZS8Ixfs6m2zUGAvDcm1nFBW7Log==",
+  "dgSpecHash": "K0rJUzAAZqo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\fheli\\source\\repos\\LojaAPI\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Projetos\\Loja\\Loja\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fheli\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\fheli\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

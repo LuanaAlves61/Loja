@@ -18,7 +18,7 @@ namespace Domain.Bll
         }
         public void Salvar(Produto produto)
         {
-            produtoDal.Salvar(produto);
+           produtoDal.Salvar(produto);
         }
 
         public List<Produto> Listar()
