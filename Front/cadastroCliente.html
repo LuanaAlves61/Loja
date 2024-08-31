@@ -1,0 +1,292 @@
+<!-- nome, cpf, data de nascimento, sexo, estado civil, renda mensal, 
+endereço, linha horizontal
+lougradouro, numero, complemento, UF, cidade 
+botão cadadtrar -->
+
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <style>
+            th,td {
+                border: 1px solid;
+                text-align: center;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th {
+                background-color: #AE0CA5;
+            }
+            tr:nth-child(even){
+                background-color: #FECEFF;
+            }
+            tr:nth-child(odd){
+                background-color: #FD9CFE;
+            }
+            
+        </style>
+    </head>
+  <body>
+    <h1>Cadastro de cliente</h1>
+    <form> 
+        <label for="nome">Nome</label>
+        <input type="text" id="Nome">
+        <br>
+        <label for="CPF">CPF</label>
+        <input type="text" id="CPF">
+        <br>
+        <label for="dataNascimento">Data de nascimento</label>
+        <input type="date" id="dataNascimento">
+        <br>
+        <label for="Sexo">Sexo</label>
+        <input type="radio" id="Feminino" name="Sexo">
+        <label for="Feminino">Feminino</label>
+        <input type="radio" id="Masculino" name="Sexo">
+        <label for="masculino">Masculino</label>
+        <br>
+        <label for="estadoCivil">Estado civil</label>
+        <select name="estadoCivil" id="">
+            <option value="0">Selecione</option>
+            <option value="1">Casado</option>
+            <option value="1">Solteiro</option>
+            <option value="1">Divorciado</option>
+            <option value="1">Viuvo</option>
+        </select>
+        <br>
+        <label for="rendaMensal">Renda Mensal</label>
+        <input type="text"id="Renda mensal">
+        <br>
+        <h3>Endereço</h3>
+        <hr> 
+        <br>
+        <label for="Lougradouro">Lougadouro</label>
+        <input type="text"id="lougradouro">
+        <br>
+        <label for="numero">Numero</label>
+        <input type="number" id="numero">
+        <br>
+        <label for="complemento">Complemento</label>
+        <input type="text" id="complemento">
+        <br>
+        <label for="UF">UF</label>
+        <select name="text" id="UF">
+            <option value="0">--SELECIONE--</option>
+            <option value="1">AC</option>
+            <option value="1">AL</option>
+            <option value="1">AM</option>
+            <option value="1">AP</option>
+            <option value="1">BA</option>
+            <option value="1">CE</option>
+            <option value="1">DF</option>
+            <option value="1">ES</option>
+            <option value="1">GO</option>
+            <option value="1">MA</option>
+            <option value="1">MS</option>
+            <option value="1">MG</option>
+            <option value="1">PA</option>
+            <option value="1">PB</option>
+            <option value="1">PR</option>
+            <option value="1">PE</option>
+            <option value="1">PI</option>
+            <option value="1">RJ</option>
+            <option value="1">RN</option>
+            <option value="1">RS</option>
+            <option value="1">RO</option>
+            <option value="1">RR</option>
+            <option value="1">SC</option>
+            <option value="1">SP</option>
+            <option value="1">SE</option>
+            <option value="1">TO</option>
+
+
+        </select>
+        
+
+        <br>
+        <label for="cidade">Cidade</label>
+        <input type="text" id="cidade">
+        <br>
+
+    </form>
+    <hr> 
+    <table>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                CPF
+            </th>
+            <th>
+                Data de nascimento
+            </th>
+            <th>
+                Cidade
+            </th>
+            <th>
+                UF
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Luana
+            </td>
+            <td>
+                457.365.738-06
+            </td>
+            <td>
+                21/04/1997
+            </td>
+            <td>
+                Ceará
+            </td>
+            <td>
+                CE
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Olívia
+            </td>
+            <td>
+                222.222.222-22
+            </td>
+            <td>
+                17/11/2018
+            </td>
+            <td>
+                Bahia
+            </td>
+            <td>BA</td>
+        </tr>
+        <tr>
+            <td>
+                Luana
+            </td>
+            <td>
+                457.365.738-06
+            </td>
+            <td>
+                21/04/1997
+            </td>
+            <td>
+                Ceará
+            </td>
+            <td>
+                CE
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Olívia
+            </td>
+            <td>
+                222.222.222-22
+            </td>
+            <td>
+                17/11/2018
+            </td>
+            <td>
+                Bahia
+            </td>
+            <td>BA</td>
+        </tr>
+        <tr>
+            <td>
+                Luana
+            </td>
+            <td>
+                457.365.738-06
+            </td>
+            <td>
+                21/04/1997
+            </td>
+            <td>
+                Ceará
+            </td>
+            <td>
+                CE
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Olívia
+            </td>
+            <td>
+                222.222.222-22
+            </td>
+            <td>
+                17/11/2018
+            </td>
+            <td>
+                Bahia
+            </td>
+            <td>BA</td>
+        </tr><tr>
+            <td>
+                Luana
+            </td>
+            <td>
+                457.365.738-06
+            </td>
+            <td>
+                21/04/1997
+            </td>
+            <td>
+                Ceará
+            </td>
+            <td>
+                CE
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Olívia
+            </td>
+            <td>
+                222.222.222-22
+            </td>
+            <td>
+                17/11/2018
+            </td>
+            <td>
+                Bahia
+            </td>
+            <td>BA</td>
+        </tr>
+        <tr>
+            <td>
+                Luana
+            </td>
+            <td>
+                457.365.738-06
+            </td>
+            <td>
+                21/04/1997
+            </td>
+            <td>
+                Ceará
+            </td>
+            <td>
+                CE
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Olívia
+            </td>
+            <td>
+                222.222.222-22
+            </td>
+            <td>
+                17/11/2018
+            </td>
+            <td>
+                Bahia
+            </td>
+            <td>BA</td>
+        </tr>
+    </table>
+  </body> 
+</html>
