@@ -13,7 +13,7 @@ namespace LojaAPI.Controllers
         public void Post(ProdutoModel produtoModel)
         {
             var produtoBll = new ProdutoBll();
-
+            
             Produto produto = new()
             {
                 Nome = produtoModel.Nome,

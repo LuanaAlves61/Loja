@@ -9,9 +9,30 @@
             $("#inputImagem").val("");
             $("#inputDescricao").val("");
 
+        }
+        function Salvar(){
 
+        var produto = {};
+            produto.nome = $("#inputNome").val();
+            produto.preco = parseFloat($("#inputPreco").val());
+            produto.urlImagem = $("#inputImagem").val();
+            produto.descricao = $("#inputDescricao").val();
+            
+            console.log(produto);
 
-
+            $.ajax({
+                url: "http://localhost:5084/Produtos",
+                type: "POST",
+                contentType: "application/json; charset=utf-8", // Define o tipo de conteúdo
+                data: JSON.stringify(produto), // Converte o objeto para JSON
+                dataType: "json",
+                success: function(response) {
+                    alert("Salvo com sucesso!");
+                },
+                error: function(xhr, status, error) {
+                    console.error("Erro:", error);
+                }
+            });
         }
     </script>
 </head>
@@ -42,7 +63,7 @@
             <a href="index.html">
                 <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
             </a>
-            <button type="button" class="btn btn-success btn-lg">Salvar</button>
+            <button type="button" class="btn btn-success btn-lg" onclick="Salvar()">Salvar</button>
     </form>
     </div>
 </body>
