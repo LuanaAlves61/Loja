@@ -1,0 +1,47 @@
+# Diretórios binários e de compilação
+bin/
+obj/
+out/
+
+# Arquivos de configuração do Visual Studio
+.vscode/
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# Dependências do NuGet
+*.nupkg
+packages/
+# se estiver usando o novo formato de pacote
+*.snupkg
+
+# Logs e relatórios
+*.log
+*.tlog
+*.log2
+TestResult*/
+TestResults/
+*.trx
+*.coverage
+*.testlog
+*.result
+*.csv
+*.opendb
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Arquivos gerados pelo sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de lock
+project.lock.json
+project.fragment.lock.json
+
+# Arquivos de publicação
+.publish/
