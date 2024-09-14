@@ -10,7 +10,7 @@ namespace LojaAPI.Controllers
     public class ProdutosController : Controller
     {
         [HttpPost(Name = "PostProdutos")]
-        public void Post(ProdutoModel produtoModel)
+        public ActionResult Post(ProdutoModel produtoModel)
         {
             var produtoBll = new ProdutoBll();
             
@@ -24,6 +24,8 @@ namespace LojaAPI.Controllers
             };
 
             produtoBll.Salvar(produto);
+
+            return Ok(new {sucess = true, message = "Produto salvo com sucesso"});
         }
 
         [HttpGet(Name = "GetProdutos")]
