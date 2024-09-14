@@ -27,7 +27,8 @@
                 data: JSON.stringify(produto), // Converte o objeto para JSON
                 dataType: "json",
                 success: function(response) {
-                    alert(response);
+                    alert(response.message);
+                    Limpar();
                 },
                 error: function(xhr, status, error) {
                     console.error("Erro:", error);

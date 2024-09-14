@@ -12,22 +12,29 @@ namespace LojaAPI.Controllers
         [HttpPost(Name = "PostProdutos")]
         public ActionResult Post(ProdutoModel produtoModel)
         {
-            var produtoBll = new ProdutoBll();
-            
-            Produto produto = new()
+            try
             {
-                Nome = produtoModel.Nome,
-                Preco = produtoModel.Preco,
-                UrlImagem = produtoModel.UrlImagem,
-                Descricao = produtoModel.Descricao
+                var produtoBll = new ProdutoBll();
 
-            };
+                Produto produto = new()
+                {
+                    Nome = produtoModel.Nome,
+                    Preco = produtoModel.Preco,
+                    UrlImagem = produtoModel.UrlImagem,
+                    Descricao = produtoModel.Descricao
 
-            produtoBll.Salvar(produto);
+                };
 
-            return Ok(new {sucess = true, message = "Produto salvo com sucesso"});
+
+                produtoBll.Salvar(produto);
+
+                return Ok(new { sucess = true, message = "Produto salvo com sucesso" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
         }
-
         [HttpGet(Name = "GetProdutos")]
         public List<Produto> GetProdutos()
         {
