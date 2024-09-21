@@ -1,13 +1,88 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="container"> 
-            <a href="cadastroProduto.html">
-                <button type="button" class= "btn btn-outline-warning">Cadastrar produtos</button>
-            </a>    
-        </div> 
-   </body>
-</html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script>
+    function CarregarProdutos(){
+        
+        $.ajax({
+            url: "http://localhost:5084/Produtos",
+            type: "GET",
+            contentType: "application/json; charset=utf-8", // Define o tipo de conteúdo
+            //data: JSON.stringify(produto), // Converte o objeto para JSON
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                CarregarEstruturasProdutos(response);
+                
+            },
+            error: function(xhr, status, error) {
+                //alert ("Erro")
+                console.error("Erro:", error);
+            }
+        });
+        //alert ("CarregarProdutos");
+        //buscar a lista 
+        //carregar página com produtos
+
+        // evento que é exacutado ao carregar a página
+
+    }
+
+    function CarregarEstruturasProdutos(produtos){
+        const container =$("#listaProdutos");
+        var rowDiv;
+
+        for(var i=0; i< produtos.length; i++){
+            if(i % 3 == 0){
+                rowDiv= $('<div class ="row"></div>');
+                container.append(rowDiv);
+            }
+
+            var colDiv = $('<div class = "col-md-4"></div>');
+            var cardDiv = $('<div class="card mb-4"></div>');
+            var img = $(`<img src="${produtos[i].urlImagem}" class ="card-img-top">`);
+            var cardBodyDiv= $('<div class="card-body text-center"></div>');
+            var title =$(`<h5 class="card-title">${produtos[i].nome}</h5>`);
+            var preco = $(`<p class="card-text">${produtos[i].preco}</p>`);
+
+            cardBodyDiv.append(title).append(preco);
+            cardDiv.append(img).append(cardBodyDiv);
+            colDiv.append(cardDiv);
+            rowDiv.append(colDiv);
+
+        }
+    }
+
+    window.onload = function () {
+        CarregarProdutos();
+    }
+</script>
+
+</head>
+<body>
+    <div class="container"> 
+        <a href="cadastroProduto.html">
+            <button type="button" class= "btn btn-outline-warning">Cadastrar produtos</button>
+        </a> 
+        <h1>Conheça nossos produtos</h1>   
+        <hr>
+        <div id="listaProdutos"></div>
+
+        <!-- usamos a estrutura abaixo para montar o CarregarEstruturasProdutos -->
+        <!-- <div class ="row"> 
+            <div class = "col-md-4">
+                <div class="card mb-4">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lpmomnzzvtd8cb" class ="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Base da Virginia</h5>
+                        <p class="card-text">R$200,00</p>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div> -->
+    </div> 
+</body>
