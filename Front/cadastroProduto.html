@@ -12,7 +12,7 @@
         }
         function Salvar(){
 
-        var produto = {};
+            var produto = {};
             produto.nome = $("#inputNome").val();
             produto.preco = parseFloat($("#inputPreco").val());
             produto.urlImagem = $("#inputImagem").val();
@@ -21,7 +21,7 @@
             console.log(produto);
 
             $.ajax({
-                url: "http://localhost:5084/Produtos",
+                url: "http://localhost:5084/Produtos/Salvar",
                 type: "POST",
                 contentType: "application/json; charset=utf-8", // Define o tipo de conteúdo
                 data: JSON.stringify(produto), // Converte o objeto para JSON
@@ -32,6 +32,11 @@
                 },
                 error: function(xhr, status, error) {
                     console.error("Erro:", error);
+                    console.log(xhr);
+                    console.log(xhr.status);
+                    if (xhr.status == 409){
+                        alert('Produto já existe!');
+                    }
                 }
             });
         }

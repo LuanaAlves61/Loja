@@ -35,5 +35,11 @@ namespace Domain.Bll
         {
             return produtoDal.BuscarPorNome(nome);
         }
+
+        public bool Existe(Produto produto)
+        {
+            return produtoDal.Existe(produto.Nome);
+
+        }
     }
 }

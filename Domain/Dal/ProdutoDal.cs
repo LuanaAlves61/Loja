@@ -95,5 +95,27 @@ namespace Domain.Dal
                 return retorno;
             }
         }
+
+        internal bool Existe(string nome)
+        {
+            var sql = @"
+                SELECT
+                       Id,
+                       Nome, 
+                       Preco,
+                       UrlImagem, 
+                       Descricao
+                FROM
+                       Produtos
+                WHERE 
+                       Nome ILIKE @nome 
+            ";
+            using (var connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                List<Produto> produtosRetornados = connection.Query<Produto>(sql, new { nome }).ToList();
+                return produtosRetornados.Count > 0;
+            }
+        }
     }
 }

@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace LojaAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")] //controller/action => nome da controler/nome do método => Ex: Produtos/BuscarTodos
     public class ProdutosController : Controller
     {
         [HttpPost(Name = "PostProdutos")]
-        public ActionResult Post(ProdutoModel produtoModel)
+        public ActionResult Salvar(ProdutoModel produtoModel)
         {
             try
             {
@@ -25,18 +25,26 @@ namespace LojaAPI.Controllers
 
                 };
 
+                // sinal de negação !, inverte o resultado booleano, ex: !true => false 
+                if (!produtoBll.Existe(produto)) 
+                {
+                    produtoBll.Salvar(produto);
+                    return Ok(new { sucess = true, message = "Produto salvo com sucesso" });
+                }
+                else
+                {
+                    return Conflict("Produto já existe!");
+                }
 
-                produtoBll.Salvar(produto);
-
-                return Ok(new { sucess = true, message = "Produto salvo com sucesso" });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { success = false, message = ex.Message });
             }
         }
+        
         [HttpGet(Name = "GetProdutos")]
-        public List<Produto> GetProdutos()
+        public List<Produto> BuscarTodos()
         {
             var produtoBll = new ProdutoBll();
             List<Produto> produtos = produtoBll.Listar();
@@ -45,7 +53,7 @@ namespace LojaAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "GetProduto")]
-        public Produto GetProduto(int id)
+        public Produto BuscarPorId(int id)
         {
             Produto produto;
             var produtoBll = new ProdutoBll();
@@ -56,8 +64,8 @@ namespace LojaAPI.Controllers
             
         }
 
-        [HttpGet("PorNome")]
-        public List<Produto> GetProdutosPorNome([FromQuery] string nome)
+        [HttpGet]
+        public List<Produto> BuscarPorNome([FromQuery] string nome)
         {
             var produtoBll = new ProdutoBll();
             List<Produto> produtos = produtoBll.BuscarPorNome(nome);
