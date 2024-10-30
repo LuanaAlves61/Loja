@@ -1,0 +1,111 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script> 
+        function Limpar(){
+            $("#inputNome").val("");
+            $("#inputPreco").val("");
+            $("#inputImagem").val("");
+            $("#inputDescricao").val("");
+
+        }
+        function Salvar(){
+
+            var produto = {};
+            produto.nome = $("#inputNome").val();
+            produto.preco = parseFloat($("#inputPreco").val());
+            produto.urlImagem = $("#inputImagem").val();
+            produto.descricao = $("#inputDescricao").val();
+            
+            console.log(produto);
+
+            $.ajax({
+                url: "http://localhost:5084/Produtos/Salvar",
+                type: "POST",
+                contentType: "application/json; charset=utf-8", // Define o tipo de conteúdo
+                data: JSON.stringify(produto), // Converte o objeto para JSON
+                dataType: "json",
+                success: function(response) {
+                    alert(response.message);
+                    Limpar();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Erro:", error);
+                    console.log(xhr);
+                    console.log(xhr.status);
+                    if (xhr.status == 409){
+                        alert('Produto já existe!');
+                    }
+                }
+            });
+        }
+
+        function CarregarProduto(idProduto){
+            $.ajax({
+                url: "http://localhost:5084/Produtos/BuscarPorId/"+idProduto,
+                type: "GET",
+                contentType: "application/json; charset=utf-8", // Define o tipo de conteúdo
+                //data: JSON.stringify(produto), // Converte o objeto para JSON
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                    $("#inputId").val(response.id);
+                    $("#inputNome").val(response.nome);
+                    $("#inputPreco").val(response.preco);
+                    $("#inputImagem").val(response.urlImagem);
+                    $("#inputDescricao").val(response.descricao);    
+                },
+                error: function(xhr, status, error) {
+                    //alert ("Erro")
+                    console.error("Erro:", error);
+                }
+            });
+        }
+        //evento chamado ao carregar página.
+        window.onload = function () {
+            // Obtém a string completa da URL
+            var urlParams = new URLSearchParams(window.location.search);
+
+            // Pega o valor do parâmetro 'id'
+            var id = urlParams.get('id');
+
+            console.log(id); // Mostra o valor do ID no console (exemplo: 123)
+            CarregarProduto(id);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Edição produto</h1>
+        
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputId">Id</label>
+                    <input type="text" class="form-control" id="inputId" readonly="readonly" placeholder="Id">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputNome">Nome</label>
+                    <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPreco">Preço</label>
+                    <input type="text" class="form-control" id="inputPreco" placeholder="00,00">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputImagem">Imagem</label>
+                <input type="text" class="form-control" id="inputImagem" placeholder="http://www...">
+            </div>
+            <div class="mb-3">
+                <label for="inputDescricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="inputDescricao" rows="3"></textarea>
+            </div>
+                <a href="index.html">
+                    <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
+                </a>
+                <button type="button" class="btn btn-success btn-lg" onclick="Salvar()">Salvar</button>
+        </form>
+    </div>
+</body>
