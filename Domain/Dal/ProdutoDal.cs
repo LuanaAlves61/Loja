@@ -13,7 +13,7 @@ namespace Domain.Dal
             connectionString = "Host=c3gtj1dt5vh48j.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com;Port=5432;Username=u860ivsbd1jsvv;Password=p7ea8ed84051854c89a2640422a245ccdccfa07bc7aa0094ef708ef67fee661a8;Database=dc1n89slqd6av1;";
         }
 
-        public void Salvar(Produto produto)
+        public void Inserir(Produto produto)
         {
             var sql = @"
             INSERT INTO Produtos (Nome, Preco, UrlImagem, Descricao) VALUES 
@@ -25,6 +25,30 @@ namespace Domain.Dal
                 connection.Open();
                 connection.Execute(sql, new
                 {
+                    produto.Nome,
+                    produto.Preco,
+                    produto.UrlImagem,
+                    produto.Descricao
+                });
+            }
+        }
+        public void Atualizar(Produto produto)
+        {
+            var sql = @"
+                update produtos set 
+                Nome = @Nome,
+                Preco = @Preco,
+                UrlImagem = @UrlImagem,
+                Descricao = @Descricao
+                where id = @pid
+            ";
+
+            using (var connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                connection.Execute(sql, new
+                {   
+                    pid = produto.Id,
                     produto.Nome,
                     produto.Preco,
                     produto.UrlImagem,

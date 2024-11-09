@@ -9,7 +9,7 @@ namespace LojaAPI.Controllers
     [Route("[controller]/[action]")] //controller/action => nome da controler/nome do método => Ex: Produtos/BuscarTodos
     public class ProdutosController : Controller
     {
-        [HttpPost(Name = "PostProdutos")]
+        [HttpPost]
         public ActionResult Salvar(ProdutoModel produtoModel)
         {
             try
@@ -42,7 +42,42 @@ namespace LojaAPI.Controllers
                 return StatusCode(500, new { success = false, message = ex.Message });
             }
         }
-        
+
+        [HttpPut] //o from query pela da Url
+        public ActionResult Salvar([FromQuery]int id, [FromBody]ProdutoModel produtoModel)
+        {
+            try
+            {
+                var produtoBll = new ProdutoBll();
+
+                Produto produto = new()
+                {   
+                    Id = id,
+                    Nome = produtoModel.Nome,
+                    Preco = produtoModel.Preco,
+                    UrlImagem = produtoModel.UrlImagem,
+                    Descricao = produtoModel.Descricao
+
+                };
+
+                // sinal de negação !, inverte o resultado booleano, ex: !true => false 
+                if (produtoBll.Existe(id))
+                {
+                    produtoBll.Salvar(produto);
+                    return Ok(new { sucess = true, message = "Produto salvo com sucesso" });
+                }
+                else
+                {
+                    return NotFound ("Produto não existe!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
+        }
+
         [HttpGet(Name = "GetProdutos")]
         public List<Produto> BuscarTodos()
         {

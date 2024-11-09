@@ -18,7 +18,10 @@ namespace Domain.Bll
         }
         public void Salvar(Produto produto)
         {
-           produtoDal.Salvar(produto);
+            if (produto.Id != 0)
+                produtoDal.Atualizar(produto);
+            else
+                produtoDal.Inserir(produto);
         }
 
         public List<Produto> Listar()
@@ -26,6 +29,11 @@ namespace Domain.Bll
             return produtoDal.Listar();
         }
 
+        /// <summary>
+        /// busca o produto pelo id
+        /// </summary>
+        /// <param name="id">id do produto</param>
+        /// <returns>retorna 1 produto</returns>
         public Produto BuscarPorId(int id)
         {
             return produtoDal.BuscarPorId(id);
@@ -39,7 +47,10 @@ namespace Domain.Bll
         public bool Existe(Produto produto)
         {
             return produtoDal.Existe(produto.Nome);
-
+        }
+        public bool Existe(int id)
+        {
+            return produtoDal.BuscarPorId(id) != null;
         }
     }
 }

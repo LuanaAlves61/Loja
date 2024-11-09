@@ -11,7 +11,7 @@
 
         }
         function Salvar(){
-
+            var idProduto = $("#inputId").val();
             var produto = {};
             produto.nome = $("#inputNome").val();
             produto.preco = parseFloat($("#inputPreco").val());
@@ -21,14 +21,13 @@
             console.log(produto);
 
             $.ajax({
-                url: "http://localhost:5084/Produtos/Salvar",
-                type: "POST",
+                url: "http://localhost:5084/Produtos/Salvar?Id="+idProduto,
+                type: "PUT",
                 contentType: "application/json; charset=utf-8", // Define o tipo de conteúdo
                 data: JSON.stringify(produto), // Converte o objeto para JSON
                 dataType: "json",
                 success: function(response) {
                     alert(response.message);
-                    Limpar();
                 },
                 error: function(xhr, status, error) {
                     console.error("Erro:", error);
