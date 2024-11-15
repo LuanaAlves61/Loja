@@ -40,7 +40,31 @@
                 }
             });
         }
+        function formatarPreco(input) {
+            let valor = input.value;
+
+            // Remove caracteres não numéricos, exceto vírgula
+            valor = valor.replace(/[^\d,]/g, '');
+            
+            // Substitui vírgulas extras por nada (permitir apenas uma)
+            valor = valor.replace(/,+/g, ',');
+
+            // Separa a parte inteira da decimal
+            let [inteiro, decimal] = valor.split(',');
+
+            // Adiciona separador de milhar
+            inteiro = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+            // Limita a parte decimal a 2 dígitos
+            if (decimal && decimal.length > 2) {
+                decimal = decimal.substring(0, 2);
+            }
+
+            // Reconstroi o valor formatado
+            input.value = decimal !== undefined ? `${inteiro},${decimal}` : inteiro;
+        }
     </script>
+
 </head>
 <body>
     <div class="container">
@@ -54,7 +78,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPreco">Preço</label>
-                    <input type="text" class="form-control" id="inputPreco" placeholder="00,00">
+                    <input type="text" class="form-control" id="inputPreco" placeholder="00,00" oninput="formatarPreco(this)">
                 </div>
             </div>
             <div class="form-group">

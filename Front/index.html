@@ -40,8 +40,8 @@
         const container =$("#listaProdutos");
         var rowDiv;
 
-        for(var i=0; i< produtos.length; i++){
-            if(i % 3 == 0){
+        for(var i=0; i< produtos.length; i++){ //
+            if(i % 3 == 0){ // % resto da divisão
                 rowDiv= $('<div class ="row"></div>');
                 container.append(rowDiv);
             }
@@ -53,7 +53,7 @@
             var img = $(`<img src="${produtos[i].urlImagem}" class ="card-img-top">`);
             var cardBodyDiv= $('<div class="card-body text-center"></div>');
             var title =$(`<h5 class="card-title">${produtos[i].nome}</h5>`);
-            var preco = $(`<p class="card-text">${produtos[i].preco}</p>`);
+            var preco = $(`<p class="card-text">R$ ${AjustarPreco(produtos[i].preco)}</p>`);
 
             cardBodyDiv.append(title).append(preco);
             cardDiv.append(img).append(cardBodyDiv);
@@ -61,6 +61,14 @@
             rowDiv.append(colDiv);
 
         }        
+    }
+    function AjustarPreco(preco) {
+        // Formatar com separador de milhar e ponto como separador decimal
+        var precoAjustado = preco
+            .toFixed(2) // Formata com 2 casas decimais
+            .replace('.', ',') // Troca o ponto por vírgula (separador decimal)
+            .replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona pontos como separador de milhar
+        return precoAjustado;
     }
 
     function BuscarProdutos(){
