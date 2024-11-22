@@ -11,10 +11,12 @@
 
         }
         function Salvar(){
-
+            var precoTxt = $("#inputPreco").val();
+            var precoFormatado = precoTxt.replace (".","")
+                                         .replace (",", ".");
             var produto = {};
             produto.nome = $("#inputNome").val();
-            produto.preco = parseFloat($("#inputPreco").val());
+            produto.preco = parseFloat(precoFormatado);
             produto.urlImagem = $("#inputImagem").val();
             produto.descricao = $("#inputDescricao").val();
             
