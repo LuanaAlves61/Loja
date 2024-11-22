@@ -1,0 +1,19 @@
+<head>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>
+        function inverter(){
+            var a=$("#inputA").val();
+            var b=$("#inputB").val();
+            var c=a;
+            a=b;
+            b=c;
+            $("#inputA").val(a);
+            $("#inputB").val(b);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="inputA">
+    <input type="text" id="inputB">
+    <button type="button" onclick="inverter()">inverter</button>
+</body>
