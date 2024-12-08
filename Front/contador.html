@@ -1,0 +1,39 @@
+<head>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>
+        function Contar(){
+            var resultado ="";
+            var Vmax =$("#inputVmax").val();
+            for (var i = 0; i <=Vmax; i++){
+                if(i == Vmax){ 
+                    resultado = resultado + i;
+                }
+                else{
+                    resultado = resultado + i + ",";
+                }
+            }
+            $("#inputResultado").val(resultado);
+        }
+        function ContarDecrescente(){
+            var resultado ="";
+            var Vmax =$("#inputVmax").val();
+            for (var i = Vmax; i >=0; i--){
+                if(i == 0){ 
+                    resultado = resultado + i;
+                }
+                else{
+                    resultado = resultado + i + ",";
+                }
+            }
+            $("#inputResultado").val(resultado);
+        }
+
+    </script>
+</head>
+<body>
+    <label for="inputVmax">Valor máximo</label>
+    <input type="number" id="inputVmax">
+    <button onclick="ContarDecrescente()">Contar</button>
+    <label for="resultado">Resultado:</label>
+    <input type="text" id="inputResultado">
+</body>
