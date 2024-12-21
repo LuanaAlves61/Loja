@@ -1,0 +1,54 @@
+<head>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>
+        function Contar(){
+            if($('input[name="ordem"]:checked').val() =="crescente"){
+                ContarCrescente();
+            }
+            else{
+                ContarDecrescente();
+            }
+        }
+        function ContarCrescente(){
+            var resultado ="";
+            var Vmax =$("#inputVmax").val();
+            for (var i = 0; i <=Vmax; i++){
+                if(i == Vmax){ 
+                    resultado = resultado + i;
+                }
+                else{
+                    resultado = resultado + i + ",";
+                }
+            }
+            $("#inputResultado").val(resultado);
+        }
+        function ContarDecrescente(){
+            var resultado ="";
+            var Vmax =$("#inputVmax").val();
+            for (var i = Vmax; i >=0; i--){
+                if(i == 0){ 
+                    resultado = resultado + i;
+                }
+                else{
+                    resultado = resultado + i + ",";
+                }
+            }
+            $("#inputResultado").val(resultado);
+        }
+        function Limpar(){
+            $("#inputVmax").val("");
+            $("#inputResultado").val("");
+        }
+    </script>
+</head>
+<body>
+    <label for="inputVmax">Valor máximo</label>
+    <input type="number" id="inputVmax">
+    <button onclick="Contar()">Contar</button>
+    <input type="radio" id="rdCrescente" name="ordem" value="crescente" onclick="Limpar()">
+    <label for="rdCrescente">Crescente</label>
+    <input type="radio" id="rdDecrescente" name="ordem" value="decrescente" checked onclick="Limpar()">
+    <label for="rdDecrescente">Decrescente</label><br>
+    <label for="resultado">Resultado:</label>
+    <input type="text" id="inputResultado">
+</body>
