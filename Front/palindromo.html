@@ -1,0 +1,25 @@
+<head>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>
+        function inverterPalavra(){
+            var palavra = $("#inputPalavra").val();
+            var tamanho = palavra.length;
+            var palavraInvertida ="";
+            $("#inputAux").val(tamanho);
+            for (var i = tamanho -1; i >=0; i--) {
+                var letra = palavra[i];
+                palavraInvertida += letra; 
+            }
+            $("#inputPalavra").val(palavraInvertida);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="inputPalavra">
+    <input type="text" id="inputAux">
+    <button type="button" onclick="inverterPalavra()">inverter</button><br>
+    <h2>Palindromo</h2><br>
+    <input type="text" name="" id="inputPalindromo">
+    <button type="button" onclick="verificarPalindromo">Verificar</button>
+    <input type="text" id="inputResultado">
+</body>
